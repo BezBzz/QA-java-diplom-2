@@ -12,8 +12,6 @@ public class UserTest {
     private String name = faker.name().username();
     private String password = faker.internet().password(3, 6);
     private String email = faker.internet().emailAddress();
- //   private String token;
-
 
 
     @Before
@@ -23,7 +21,7 @@ public class UserTest {
 
 
     @Test
-    public void createUserDoneTest() {
+    public void createUserDone() {
         User user = new User(name, password, email);
         Response response = userApi.createUser(user);
         response
@@ -31,7 +29,6 @@ public class UserTest {
                 .body("success", equalTo(true))
                 .statusCode(SC_OK);
         System.out.println(response.body().asString());
-
     }
 
 
