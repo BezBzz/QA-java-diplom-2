@@ -15,13 +15,6 @@ public class UserApi {
                 .post(BASE_URL + "/api/auth/register");
     }
 
-//    @Step("Создать пользователя c токеном")
-//    public Response createUserWithToken(User user) {
-//        return given()
-//                .header("Content-type", "application/json")
-//                .body(user)
-//                .post(BASE_URL + "/api/auth/register");
-//    }
 
     @Step("Залогиниться пользователем")
     public Response loginUser(User user) {
@@ -58,4 +51,4 @@ public class UserApi {
                 .delete(BASE_URL + "/api/auth/user");
     }
 
-   }
+}

@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.notNullValue;
 public class OrderTest {
     private OrderApi orderApi;
     private UserApi userApi;
-    private static List<String> ingredients; //= [("60d3b41abdacab0026a733c6", "609646e4dc916e00276b2870")];
+    private static List<String> ingredients;
     private final Faker faker = new Faker();
     private String name = faker.name().username();
     private String password = faker.internet().password(3, 6);
@@ -25,11 +25,6 @@ public class OrderTest {
         userApi = new UserApi();
     }
 
-//    @Before
-//    public void getIngredients(){
-//        Response response = orderApi.getIngredients();
-//        ingredients = response.jsonPath().getList("data.id");
-//    }
 
     @Test
     public void createOrderWithoutAuth() {
@@ -78,6 +73,34 @@ public class OrderTest {
         response
                 .then()
                 .statusCode(SC_INTERNAL_SERVER_ERROR);
+        System.out.println(response.body().asString());
+    }
+
+    @Test
+    public void getUserOrderWithoutAuth() {
+        Order order = new Order();
+        Response response = orderApi.getUserOrders();
+        response
+                .then()
+                .statusCode(SC_UNAUTHORIZED)
+                .body("message", equalTo("You should be authorised"));
+        System.out.println(response.body().asString());
+    }
+
+    @Test
+    public void getUserOrderWithAuth() {
+        User user = new User(name, password, email);
+        Response responseCreate = userApi.createUser(user);
+        String token = responseCreate.jsonPath().getString("accessToken");
+        Response responseIngredients = orderApi.getIngredients();
+        ingredients = responseIngredients.jsonPath().getList("data._id");
+        Order order = new Order(ingredients);
+        orderApi.createOrdersWithToken(order, token);
+        Response response = orderApi.getUserOrdersWithAuth(token);
+        response
+                .then()
+                .statusCode(SC_OK)
+                .body("success", equalTo(true));
         System.out.println(response.body().asString());
     }
 

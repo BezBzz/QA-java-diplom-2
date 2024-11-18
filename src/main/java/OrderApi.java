@@ -26,10 +26,18 @@ public class OrderApi {
     }
 
     @Step("Получение списка заказов пользователя")
-    public Response getUserOrders(String token) {
+    public Response getUserOrders() {
         return given()
                 .header("Content-type", "application/json")
-                .header("Authorization", token)
+               // .header("Authorization", token)
+                .get(BASE_URL + "/api/orders");
+    }
+
+    @Step("Получение списка заказов пользователя c авторизацией")
+    public Response getUserOrdersWithAuth(String token) {
+        return given()
+                .header("Content-type", "application/json")
+                 .header("Authorization", token)
                 .get(BASE_URL + "/api/orders");
     }
 
