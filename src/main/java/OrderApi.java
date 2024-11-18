@@ -7,7 +7,7 @@ public class OrderApi {
 
     private static final String BASE_URL = "https://stellarburgers.nomoreparties.site";
 
-    @Step("Создание заказа с токеном")
+    @Step("Создание заказа с токеном.")
     public Response createOrdersWithToken(Order order, String token) {
         return given()
                 .header("Content-type", "application/json")
@@ -17,7 +17,7 @@ public class OrderApi {
                 .post(BASE_URL + "/api/orders");
     }
 
-    @Step("Создание заказа без токена")
+    @Step("Создание заказа без токена.")
     public Response createOrdersWithoutToken(Order order) {
         return given()
                 .header("Content-type", "application/json")
@@ -25,23 +25,23 @@ public class OrderApi {
                 .post(BASE_URL + "/api/orders");
     }
 
-    @Step("Получение списка заказов пользователя")
+    @Step("Получение списка заказов пользователя.")
     public Response getUserOrders() {
         return given()
-                .header("Content-type", "application/json")
-               // .header("Authorization", token)
+                .header("Content-type", "application/json.")
+                // .header("Authorization", token)
                 .get(BASE_URL + "/api/orders");
     }
 
-    @Step("Получение списка заказов пользователя c авторизацией")
+    @Step("Получение списка заказов пользователя c авторизацией.")
     public Response getUserOrdersWithAuth(String token) {
         return given()
                 .header("Content-type", "application/json")
-                 .header("Authorization", token)
+                .header("Authorization", token)
                 .get(BASE_URL + "/api/orders");
     }
 
-    @Step("Получение списка ингредиентов")
+    @Step("Получение списка ингредиентов.")
     public Response getIngredients() {
         return given()
                 .header("Content-type", "application/json")

@@ -25,7 +25,6 @@ public class OrderTest {
         userApi = new UserApi();
     }
 
-
     @Test
     public void createOrderWithoutAuth() {
         Response responseIngredients = orderApi.getIngredients();

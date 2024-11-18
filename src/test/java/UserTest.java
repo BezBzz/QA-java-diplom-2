@@ -13,12 +13,10 @@ public class UserTest {
     private String password = faker.internet().password(3, 6);
     private String email = faker.internet().emailAddress();
 
-
     @Before
     public void SetUp() {
         userApi = new UserApi();
     }
-
 
     @Test
     public void createUserDone() {
@@ -30,7 +28,6 @@ public class UserTest {
                 .statusCode(SC_OK);
         System.out.println(response.body().asString());
     }
-
 
     @Test
     public void createExistingUser() {
