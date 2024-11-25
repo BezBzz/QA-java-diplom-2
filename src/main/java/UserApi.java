@@ -7,7 +7,7 @@ public class UserApi {
 
     private static final String BASE_URL = "https://stellarburgers.nomoreparties.site";
 
-    @Step("Создать пользователя")
+    @Step("Создать пользователя.")
     public Response createUser(User user) {
         return given()
                 .header("Content-type", "application/json")
@@ -15,8 +15,7 @@ public class UserApi {
                 .post(BASE_URL + "/api/auth/register");
     }
 
-
-    @Step("Залогиниться пользователем")
+    @Step("Залогиниться пользователем.")
     public Response loginUser(User user) {
         return given()
                 .header("Content-type", "application/json")
@@ -24,7 +23,7 @@ public class UserApi {
                 .post(BASE_URL + "/api/auth/login");
     }
 
-    @Step("Изменить данные пользователя без авторизации")
+    @Step("Изменить данные пользователя без авторизации.")
     public Response changeUserDataWithoutAuth(User user) {
         return given()
                 .header("Content-type", "application/json")
@@ -32,7 +31,7 @@ public class UserApi {
                 .patch(BASE_URL + "/api/auth/user");
     }
 
-    @Step("Изменить данные пользователя с авторизацией")
+    @Step("Изменить данные пользователя с авторизацией.")
     public Response changeUserDataWithAuth(User user, String token) {
         changeUserDataWithoutAuth(user);
         return given()
@@ -43,7 +42,7 @@ public class UserApi {
 
     }
 
-    @Step("Удалить пользователя")
+    @Step("Удалить пользователя.")
     public Response deleteUser(User user) {
         return given()
                 .header("Content-type", "application/json")

@@ -1,0 +1,18 @@
+-------------------------------------------------------------------------------
+Test set: OrderTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 30.453 s <<< FAILURE! - in OrderTest
+createOrderWithoutAuth(OrderTest)  Time elapsed: 1.109 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <401> but was <200>.
+
+	at OrderTest.createOrderWithoutAuth(OrderTest.java:40)
+
+createOrderWithoutIngredients(OrderTest)  Time elapsed: 0.484 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <400> but was <200>.
+
+	at OrderTest.createOrderWithoutIngredients(OrderTest.java:71)
+

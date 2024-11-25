@@ -1,4 +1,6 @@
 import com.github.javafaker.Faker;
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,14 +15,14 @@ public class UserTest {
     private String password = faker.internet().password(3, 6);
     private String email = faker.internet().emailAddress();
 
-
     @Before
     public void SetUp() {
         userApi = new UserApi();
     }
 
-
     @Test
+    @DisplayName("Успешное создание пользователя")
+    @Description("Проверяем создание пользователя")
     public void createUserDone() {
         User user = new User(name, password, email);
         Response response = userApi.createUser(user);
@@ -31,8 +33,9 @@ public class UserTest {
         System.out.println(response.body().asString());
     }
 
-
     @Test
+    @DisplayName("Создание существующего пользователя")
+    @Description("Проверяем корректное поведение при повторном создании пользователя")
     public void createExistingUser() {
         User user = new User(name, password, email);
         userApi.createUser(user);
@@ -45,6 +48,8 @@ public class UserTest {
     }
 
     @Test
+    @DisplayName("Создание пользователя без пароля")
+    @Description("Проверяем корректное поведение при создании пользователя без пароля")
     public void createUserWithoutPassword() {
         User user = new User(name, null, email);
         Response response = userApi.createUser(user);
@@ -56,6 +61,8 @@ public class UserTest {
     }
 
     @Test
+    @DisplayName("Вход пользователем")
+    @Description("Проверяем успешный вход")
     public void loginExistingUser() {
         User user = new User(name, password, email);
         userApi.createUser(user);
@@ -68,6 +75,8 @@ public class UserTest {
     }
 
     @Test
+    @DisplayName("Логин с невалидными логином и паролем")
+    @Description("Проверяем корректное поведение при невалидных кредах")
     public void loginWithIncorrectLoginAndPassword() {
         User user = new User("testLogin", "testPass", email);
         Response response = userApi.loginUser(user);
@@ -79,6 +88,8 @@ public class UserTest {
     }
 
     @Test
+    @DisplayName("Изменение пользователя без авторизации")
+    @Description("Проверяем измненние данных пользователя без авторизации")
     public void changeDataUserWithoutAuthorization() {
         User user = new User(name, password, email);
         userApi.createUser(user);
@@ -93,6 +104,8 @@ public class UserTest {
     }
 
     @Test
+    @DisplayName("Изменение пользователя с авторизацией")
+    @Description("Проверяем измненние данных пользователя с авторизацией")
     public void changeDataUserWithAuthorization() {
         User user = new User(name, password, email);
         Response response = userApi.createUser(user);
